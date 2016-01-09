@@ -1,0 +1,61 @@
+.index {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+}
+.index input {
+  background: none;
+  border: none;
+  color: white;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+}
+.index input[type="checkbox"] {
+  margin: 9px 5px 7px;
+}
+.index_games {
+  flex: 1;
+  padding: 0 12px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.index_game-setup {
+  flex: 2;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.index_game-setup-header {
+  display: flex;
+}
+.index_game-setup-title {
+  flex: 1;
+}
+.index_game-start {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+.index_name-badge {
+  color: rgba(255, 255, 255, 0.25);
+  padding: 1px 5px;
+  margin: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  font-weight: normal;
+}
+.index_name-badge.active {
+  background: rgba(255, 79, 0, 0.7);
+  color: white;
+}
+.index_game-setup-footer {
+  text-align: right;
+}
+.index_game-setup-footer-item {
+  display: inline-block;
+  margin: 12px;
+}

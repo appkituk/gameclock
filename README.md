@@ -1,11 +1,10 @@
-# Game-clock
+# Game Clock
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A programmable clock for games such as speed chess. Uses cordova for deployment to mobile devices.
 
-## Prerequisites
+## Development
 
-You will need the following things properly installed on your computer.
+Game Clock is an ember-cli app so you will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)

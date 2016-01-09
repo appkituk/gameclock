@@ -1,0 +1,48 @@
+body {
+  font-family: Avenir next;
+  color: white;
+  background: #000F1F;
+  background-size: 100%;
+}
+button {
+  font-family: Avenir next;
+  color: white;
+  font-weight: inherit;
+  background: none;
+  border: none;
+  font-size: inherit;
+}
+a {
+  text-decoration: none;
+  color: #FF6B00;
+  font-weight: 500;
+}
+h2, h3 {
+  font-weight: 400;
+}
+.list {
+  padding: 0;
+  list-style: none;
+}
+.list-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 3px;
+  display: flex;
+  min-height: 2em;
+  padding: 0;
+}
+.list-item.active {
+  background: rgba(255, 79, 0, 0.7);
+}
+.list-item-main {
+  flex-grow: 1;
+  text-align: left;
+  padding: .66em;
+  align-self: center;
+}
+
+@import './index';
+@import './game';
+@import './icon';
+@import './duration-input';

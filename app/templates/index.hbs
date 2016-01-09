@@ -1,0 +1,66 @@
+<section class="index">
+  
+  <div class="index_games">
+    <h2>Games</h2>
+    <ul class="list">
+      {{#each model as |game|}}
+        <li class="list-item {{if (eq game selectedGame) 'active'}}">
+          <button {{action "selectGame" game}} class="list-item-main">{{game.displayName}}</button>
+        </li>
+      {{/each}}
+      <li class="list-item"><a href="#" class="list-item-main" {{action "newGame"}}>New game</a></li>
+    </ul>
+  </div>
+
+  <div class="index_game-setup">
+    {{#if selectedGame}}
+      <h2 class="index_game-setup-header">
+        <input class="index_game-setup-title" placeholder="Untitled game..." value="{{selectedGame.name}}"
+          onchange={{action (action "updateGameName" selectedGame) value="target.value"}} />
+        {{#link-to "game" selectedGame class="index_game-start"}}Start{{/link-to}}
+      </h2>
+
+      <ul class="list">
+        {{#each selectedGame.players as |player|}}
+          <li class="list-item">
+            <input class="list-item-main" placeholder="Type a player name..." value="{{player.name}}"
+              onchange={{action (action "updatePlayerName" player) value="target.value"}} />
+            {{duration-input value=player.reserveTime increment=5000 update=(action "updatePlayerReserveTime" player)}}
+            <button class="icon icon--delete" {{action "deletePlayer" player}}>Delete</button>
+          </li>
+        {{else}}
+          <p><em>Add at least one player to this game.</em></p>
+        {{/each}}
+        <li class="list-item"><a href="#" {{action "addPlayer"}} class="list-item-main">Add player</a></li>
+      </ul>
+
+      <ul class="list">
+        {{#each selectedGame.arrangedSteps as |step|}}
+          <li class="list-item">
+            <input class="list-item-main" placeholder="Type an instruction..." value="{{step.instruction}}"
+              onchange={{action (action "updateStepInstruction" step) value="target.value"}} />
+            
+            {{duration-input value=step.wait increment=5000 update=(action "updateStepWait" step)}}
+
+            {{#each selectedGame.players as |player|}}
+              {{name-badge class="index_name-badge" label=player.name active=(contains step.actors player)
+              toggleActive=(action (action "toggleActor" player) step)}}
+            {{/each}}
+
+            <button class="icon icon--chevron-up" {{action "moveStepUp" step}}>Up</button>
+            <button class="icon icon--chevron-down" {{action "moveStepDown" step}}>Down</button>
+            <button class="icon icon--delete" {{action "deleteStep" step}}>Delete</button>
+          </li>
+        {{else}}
+          <p><em>Add steps to instruct players on the actions to take within the step's time limit.</em></p>
+        {{/each}}
+        <li class="list-item"><a href="#" class="list-item-main" {{action "addStep"}}>Add step</a></li>
+      </ul>
+      <div class="index_game-setup-footer">
+        <a href="#" {{action "duplicateGame" selectedGame}} class="index_game-setup-footer-item">Duplicate</a>
+        <a href="#" {{action "deleteGame" selectedGame}} class="index_game-setup-footer-item">Delete game</a>
+      </div>
+    {{/if}}
+  </div>
+
+</section>

@@ -1,0 +1,15 @@
+<section class="game">
+  <div class="game_main">
+    <button {{action "menu"}} class="game_control icon--menu">Menu</button>
+    <button {{action "resetGame"}} class="game_control icon--reset">Reset</button>
+    {{#each model.arrangedSteps as |step|}}
+      <div class="game_instruction {{if (eq step model.step) 'active'}}">{{step.instruction}}</div>
+    {{/each}}
+    <div class="game_turn">Turn {{model.turn}}</div>
+  </div>
+  {{#each model.players as |player|}}
+    <button class="game_player-hud" {{action "playerReadyForNextStep" player}} disabled={{if (and player.actionRequired (not player.timer.hasExpired)) null 'disabled'}}>
+      {{fixed 0 player.timer.value}}
+    </button>
+  {{/each}}
+</section>
