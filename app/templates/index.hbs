@@ -1,5 +1,6 @@
 <section class="index">
-  
+
+  {{#if (or (not selectedGame) (not media.isMobile))}}
   <div class="index_games">
     <h2>Games</h2>
     <ul class="list">
@@ -11,10 +12,15 @@
       <li class="list-item"><a href="#" class="list-item-main" {{action "newGame"}}>New game</a></li>
     </ul>
   </div>
+  {{/if}}
 
+  {{#if (or selectedGame (not media.isMobile))}}
   <div class="index_game-setup">
     {{#if selectedGame}}
       <h2 class="index_game-setup-header">
+        {{#if media.isMobile}}
+          <button class="index_game-setup-back icon icon--back" {{action "selectGame" null}}>Back</button>
+        {{/if}}
         <input class="index_game-setup-title" placeholder="Untitled game..." value="{{selectedGame.name}}"
           onchange={{action (action "updateGameName" selectedGame) value="target.value"}} />
         {{#link-to "game" selectedGame class="index_game-start"}}Start{{/link-to}}
@@ -62,5 +68,6 @@
       </div>
     {{/if}}
   </div>
+  {{/if}}
 
 </section>

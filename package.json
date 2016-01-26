@@ -39,6 +39,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-local-storage": "1.0.1",
+    "ember-responsive": "1.2.5",
     "ember-truth-helpers": "1.2.0"
   }
 }
