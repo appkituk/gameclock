@@ -7,7 +7,7 @@ export default DS.Model.extend({
    * The steps in this game.
    * {Step[]}
    */
-  steps: DS.hasMany('step'),
+  steps: DS.hasMany('step', { async: true }),
 
   /**
    * The steps in this game in order.
@@ -21,7 +21,7 @@ export default DS.Model.extend({
    * The players in this game.
    * @type {Player[]}
    */
-  players: DS.hasMany('player'),
+  players: DS.hasMany('player', { async: true }),
 
   /**
    * The name for this game.

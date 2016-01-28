@@ -41,6 +41,13 @@ export default Ember.Controller.extend({
       newGame.get('players').pushObject(player2);
       this.send('selectGame', newGame);
       
+      Ember.RSVP.Promise.all([
+        player1.save(),
+        player2.save()
+      ]).then(function() {
+        newGame.save();
+      });
+
       Ember.run.schedule('render', this, function() {
         Ember.$('.index_game-setup-title').focus();
       });
@@ -72,20 +79,29 @@ export default Ember.Controller.extend({
           newStep.get('actors').pushObject(newPlayerMap.get(actor));
         }, this);
       }, this);
+
+      this.send('selectGame', newGame);
+
+      newGame.save().then(() => {
+        newGame.get('players').forEach(player => player.save());
+        newGame.get('steps').forEach(step => step.save());
+      });
     },
 
     /**
      * Delete the given game, along with all its players and steps.
      */
     deleteGame(game) {
+      let promises = [];
       game.get('steps').slice().forEach(function(step) {
-        console.log('tick');
-        step.deleteRecord();
+        promises.push(step.destroyRecord());
       });
       game.get('players').slice().forEach(function(player) {
-        player.deleteRecord();
+        promises.push(player.destroyRecord());
       });
-      game.deleteRecord();
+      Ember.RSVP.Promise.all(promises).then(function() {
+        game.destroyRecord();
+      });
 
       this.set('selectedGame', null);
     },
@@ -94,7 +110,7 @@ export default Ember.Controller.extend({
      * Updates the name for the given game with the given value.
      */
     updateGameName(model, value) {
-      model.set('name', value);
+      model.set('name', value).save();
     },
 
     /**
@@ -106,6 +122,10 @@ export default Ember.Controller.extend({
         let num = game.get('players.length') + 1;
         let newPlayer = this.store.createRecord('player', {name: 'Player ' + num});
         game.get('players').pushObject(newPlayer);
+
+        newPlayer.save().then(function() {
+          game.save();
+        });
       }
     },
 
@@ -113,14 +133,19 @@ export default Ember.Controller.extend({
      * Delete a player.
      */
     deletePlayer(player) {
-      player.deleteRecord();
+      let game = player.get('game');
+      let steps = player.get('steps');
+      player.destroyRecord().then(function() {
+        steps.forEach(step => step.save());
+        game.save();
+      });
     },
 
     /**
      * Updates the name for the given player with the given value.
      */
     updatePlayerName(player, value) {
-      player.set('name', value);
+      player.set('name', value).save();
     },
 
     /**
@@ -137,7 +162,11 @@ export default Ember.Controller.extend({
     addStep() {
       let game = this.get('selectedGame');
       let order = game.get('steps.length');
-      this.store.createRecord('step', {game, order});
+      let newStep = this.store.createRecord('step', {game, order});
+
+      newStep.save().then(function() {
+        game.save();
+      });
 
       Ember.run.schedule('render', this, function() {
         Ember.$('.index_game-setup input.index_game-list-item-main').focus();
@@ -148,15 +177,20 @@ export default Ember.Controller.extend({
      * Remove the step from its game.
      */
     deleteStep(step) {
-      step.deleteRecord();
-      this.reindexStepOrder();
+      let game = step.get('game');
+      let actors = step.get('actors');
+      step.destroyRecord().then(() => {
+        actors.forEach(actor => actor.save());
+        game.save();
+        this.reindexStepOrder();
+      });
     },
 
     /**
      * Updates the instruction for the given step with the given value.
      */
     updateStepInstruction(model, value) {
-      model.set('instruction', value);
+      model.set('instruction', value).save();
     },
 
     /**
@@ -174,8 +208,8 @@ export default Ember.Controller.extend({
       let currentOrder = step.get('order');
       let swap = step.get('game.arrangedSteps').objectAt(currentOrder - 1);
       if (swap) {
-        step.set('order', swap.get('order'));
-        swap.set('order', currentOrder);
+        step.set('order', swap.get('order')).save();
+        swap.set('order', currentOrder).save();
       }
     },
 
@@ -186,8 +220,8 @@ export default Ember.Controller.extend({
       let currentOrder = step.get('order');
       let swap = step.get('game.arrangedSteps').objectAt(currentOrder + 1);
       if (swap) {
-        step.set('order', swap.get('order'));
-        swap.set('order', currentOrder);
+        step.set('order', swap.get('order')).save();
+        swap.set('order', currentOrder).save();
       }
     },
 
@@ -201,6 +235,8 @@ export default Ember.Controller.extend({
       } else {
         actors.pushObject(player);
       }
+      step.save();
+      player.save();
     }
 
   }
