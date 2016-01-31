@@ -4,16 +4,40 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"PowerManagement\"><param name=\"ios-package\" value=\"PowerManagement\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "uk.appkit.gameclock"
+        },
+        "cordova-plugin-powermanagement": {
+            "PACKAGE_NAME": "uk.appkit.gameclock"
         }
     },
     "dependent_plugins": {},
-    "modules": [],
+    "modules": [
+        {
+            "file": "plugins/cordova-plugin-powermanagement/www/powermanagement.js",
+            "id": "cordova-plugin-powermanagement.powermanagement",
+            "pluginId": "cordova-plugin-powermanagement",
+            "clobbers": [
+                "window.powermanagement"
+            ]
+        }
+    ],
     "plugin_metadata": {
-        "cordova-plugin-whitelist": "1.2.1"
+        "cordova-plugin-whitelist": "1.2.1",
+        "cordova-plugin-powermanagement": "1.0.1"
     }
 }

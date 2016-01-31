@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "uk.appkit.gameclock"
+        },
+        "cordova-plugin-powermanagement": {
+            "PACKAGE_NAME": "uk.appkit.gameclock"
         }
     },
     "dependent_plugins": {}

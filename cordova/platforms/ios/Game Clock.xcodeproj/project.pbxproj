@@ -39,6 +39,7 @@
 		7E7966E61810823500FA85AD /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DC1810823500FA85AD /* icon-small.png */; };
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		00EE45A4E4624BEA8CCA48BD /* PowerManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DE2CC0623F4BA092C85DB3 /* PowerManagement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,8 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Game Clock/config.xml"; sourceTree = "<group>"; };
+		62DE2CC0623F4BA092C85DB3 /* PowerManagement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "PowerManagement.m"; path = "cordova-plugin-powermanagement/PowerManagement.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		9238EF67429A4E55802128CE /* PowerManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PowerManagement.h"; path = "cordova-plugin-powermanagement/PowerManagement.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				62DE2CC0623F4BA092C85DB3 /* PowerManagement.m */,
+				9238EF67429A4E55802128CE /* PowerManagement.h */,
 			);
 			name = Plugins;
 			path = "Game Clock/Plugins";
@@ -386,6 +391,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
+				00EE45A4E4624BEA8CCA48BD /* PowerManagement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
