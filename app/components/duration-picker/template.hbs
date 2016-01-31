@@ -1,0 +1,10 @@
+<select onchange={{action "change"}} class="duration-picker_control">
+  {{#each minuteOptions as |option|}}
+    <option selected={{if (eq selectedMinute option) 'selected' null}} value={{option}}>{{option}}m</option>
+  {{/each}}
+</select>
+<select onchange={{action "change"}} class="duration-picker_control">
+  {{#each secondOptions as |option|}}
+    <option selected={{if (eq selectedSecond option) 'selected' null}} value={{option}}>{{option}}s</option>
+  {{/each}}
+</select>

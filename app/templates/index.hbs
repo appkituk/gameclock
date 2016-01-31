@@ -25,7 +25,7 @@
           <li class="list-item">
             <input class="list-item-main" placeholder="Type a player name..." value="{{player.name}}"
               onchange={{action (action "updatePlayerName" player) value="target.value"}} />
-            {{duration-input value=player.reserveTime increment=5000 update=(action "updatePlayerReserveTime" player)}}
+            {{duration-picker value=player.reserveTime increment=5000 update=(action "updatePlayerReserveTime" player)}}
             <button class="icon icon--delete" {{action "deletePlayer" player}}>Delete</button>
           </li>
         {{else}}
@@ -40,7 +40,7 @@
             <input class="list-item-main" placeholder="Type an instruction..." value="{{step.instruction}}"
               onchange={{action (action "updateStepInstruction" step) value="target.value"}} />
             
-            {{duration-input value=step.wait increment=5000 update=(action "updateStepWait" step)}}
+            {{duration-picker value=step.wait increment=5000 update=(action "updateStepWait" step)}}
 
             {{#each selectedGame.players as |player|}}
               {{name-badge class="index_name-badge" label=player.name active=(contains step.actors player)
