@@ -9,7 +9,7 @@
   </div>
   {{#each model.players as |player|}}
     <button class="game_player-hud" {{action "playerReadyForNextStep" player}} disabled={{if (and player.actionRequired (not player.timer.hasExpired)) null 'disabled'}}>
-      {{fixed 0 player.timer.value}}
+      {{format-time player.timer.value}}
     </button>
   {{/each}}
 </section>
